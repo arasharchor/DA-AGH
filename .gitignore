@@ -1,0 +1,14 @@
+*.pyc
+.DS_STORE
+.idea
+*.npz
+*.pkl
+*.png
+*.bin
+data
+.coverage
+cover
+meta
+*.o
+*.so
+python_src/.idea
