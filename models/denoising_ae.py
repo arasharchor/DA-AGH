@@ -8,7 +8,7 @@ import numpy as np
 
 
 class DenoisingAutoEncoder(object):
-    def __init__(self, n_visible, n_hidden, weights=None, hidden_bias=None, visible_bias=None, random_on_gpu=True,
+    def __init__(self, n_visible, n_hidden, weights=None, hidden_bias=None, visible_bias=None, random_on_gpu=False,
                  seed=69, activation=T.nnet.sigmoid):
         self.n_visible = n_visible
         self.n_hidden = n_hidden
@@ -46,7 +46,7 @@ class DenoisingAutoEncoder(object):
         return self.t_rng.binomial(size=x.shape, n=1, p=1 - corruption_level) * x
 
     def hidden_values(self, x):
-        return self.activation(T.dot(x, self.ts_weights) + self.ts_visible_bias)
+        return self.activation(T.dot(x, self.ts_weights) + self.ts_hidden_bias)
 
     def reconstruction(self, hidden):
         return self.activation(T.dot(hidden, self.ts_weights.T) + self.ts_visible_bias)
