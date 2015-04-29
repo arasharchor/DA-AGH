@@ -26,12 +26,12 @@ index = T.lscalar()
 
 n_visible = 784
 # n_hidden = 3 * n_visible
-n_hidden = 64
+n_hidden = 128
 batch_size = 100
-epochs = 200
+epochs = 10
 n_train_batches = 500
 
-corruption_level = 0.4
+corruption_level = 0.2
 learning_rate = 0.1
 
 da = DenoisingAutoEncoder(n_visible, n_hidden)
