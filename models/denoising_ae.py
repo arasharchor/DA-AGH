@@ -18,12 +18,10 @@ class DenoisingAutoEncoder(object):
         else:
             self.t_rng = RandomStreams(seed)
 
+        # TODO 1
         if not weights:
-            weights = np.asarray(
-                np.random.normal(
-                    scale=0.01,
-                    size=(self.n_visible, self.n_hidden)),
-                dtype=theano.config.floatX)
+            # weights should be initialized to gaussian with mean=0 and std=0.01
+            pass
         self.ts_weights = theano.shared(value=weights, name='W', borrow=True)
 
         if not hidden_bias:
@@ -43,13 +41,32 @@ class DenoisingAutoEncoder(object):
         self.params = [self.ts_weights, self.ts_hidden_bias, self.ts_visible_bias]
 
     def get_corrupted_input(self, x, corruption_level):
-        return self.t_rng.binomial(size=x.shape, n=1, p=1 - corruption_level) * x
+        """
+
+        :param x: training data
+        :param corruption_level:
+        :return: corrupted data with probability 1 - corruption_level
+        """
+        # TODO 2
+        pass
 
     def hidden_values(self, x):
-        return self.activation(T.dot(x, self.ts_weights) + self.ts_hidden_bias)
+        """
+
+        :param x: data
+        :return: hidden layer activation
+        """
+        # TODO 3
+        pass
 
     def reconstruction(self, hidden):
-        return self.activation(T.dot(hidden, self.ts_weights.T) + self.ts_visible_bias)
+        """
+
+        :param hidden: activation of hidden layer
+        :return: data reconstruction (activation of output layer)
+        """
+        # TODO 4
+        pass
 
     def get_cost_updates(self, corruption_level, learning_rate):
         corrupted_input = self.get_corrupted_input(self.x, corruption_level)

@@ -26,12 +26,12 @@ index = T.lscalar()
 
 n_visible = 784
 # n_hidden = 3 * n_visible
-n_hidden = 64
+n_hidden = 128
 batch_size = 100
-epochs = 200
+epochs = 10
 n_train_batches = 500
 
-corruption_level = 0.4
+corruption_level = 0.2
 learning_rate = 0.1
 
 da = DenoisingAutoEncoder(n_visible, n_hidden)
@@ -59,14 +59,23 @@ with open('data/params.pkl', 'w+') as f:
 
 
 def reconstruct(batch, params, activation):
-    w, hb, vb = params
-    output = activation(batch.dot(w) + hb)
-    output = activation(output.dot(w.T) + vb)
-    return output
+    """
+
+    :param batch: data (numpy array)
+    :param params: tuple of weights, hidden bias, visible bias
+    :param activation: activation function that takes one argument (numpy array)
+    :return: reconstruction of batch
+    """
+    pass
 
 
 def sigmoid(x):
-    return 1. / (1. + np.exp(-x))
+    """
+
+    :param x: data (numpy array)
+    :return: value of sigmoid function
+    """
+    pass
 
 reconstructed = reconstruct(valid_set[0][:30], [param.get_value() for param in da.params], sigmoid)
 
